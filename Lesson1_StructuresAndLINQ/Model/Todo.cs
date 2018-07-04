@@ -9,9 +9,14 @@ namespace Lesson1_StructuresAndLINQ.Model
     class Todo
     {
         public int Id { get; set; }
-        public DateTime CreatedAt { get; set; }
         public string Name { get; set; }
         public bool IsComplete { get; set; }
         public int UserId { get; set; }
+        public DateTime CreatedAt { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name}, {(IsComplete ? "Completed" : "Uncompleted")}";
+        }
     }
 }
