@@ -12,5 +12,6 @@ namespace Lesson1_StructuresAndLINQ.Model
         public string Name { get; set; }
         public bool IsComplete { get; set; }
         public int UserId { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
