@@ -12,7 +12,7 @@ using Lesson1_StructuresAndLINQ.Model;
 
 namespace Lesson1_StructuresAndLINQ
 {
-    public class DB
+    class DB
     {
         public string CreateURL(string endpoint)
         {
@@ -26,7 +26,7 @@ namespace Lesson1_StructuresAndLINQ
         }
 
 
-        public List<User> CreateDB()
+        public static List<User> CreateDB()
         {
             var url = @"https://5b128555d50a5c0014ef1204.mockapi.io/";
 
@@ -36,14 +36,14 @@ namespace Lesson1_StructuresAndLINQ
             List<Comment> comments = null;
 
             var client = new HttpClient();
-            
+
             var usersResponse = client.GetAsync(url + "users").Result;
             if (usersResponse.IsSuccessStatusCode)
             {
                 string userJSON = usersResponse.Content.ReadAsStringAsync().Result;
                 users = JsonConvert.DeserializeObject<List<User>>(userJSON);
             }
-            
+
             var postsResponse = client.GetAsync(url + "posts").Result;
             if (postsResponse.IsSuccessStatusCode)
             {
@@ -65,19 +65,39 @@ namespace Lesson1_StructuresAndLINQ
                 comments = JsonConvert.DeserializeObject<List<Comment>>(commentsJSON);
             }
 
-            foreach (var post in posts)
-            {
-                post.Comments = comments.Where(x => x.PostId == post.Id).ToList();
-            }
 
             foreach (var user in users)
             {
                 user.Todos = todos.Where(x => x.UserId == user.Id).ToList();
                 user.Posts = posts.Where(x => x.UserId == user.Id).ToList();
+
+                foreach (var post in user.Posts)
+                {
+                    post.Comments = comments.Where(x => x.PostId == post.Id).ToList();
+                }
             }
+
+
+            //var query = from user in users
+            //            join todo in todos on user.Id equals todo.UserId
+            //            into userTodos
+
+            //            join post in posts on user.Id equals post.UserId
+            //            into userPosts
+
+            //            from item in userPosts
+            //            join comment in comments on item.Id equals comment.PostId
+            //            into postComments
+
+            //            select new User()
+            //            {
+            //                Id = user.Id,
+            //                Name = user.Name,
+            //                Todos = userTodos.ToList(),
+            //                Posts = userPosts.ToList()
+            //            };
 
             return users;
         }
-
     }
 }
