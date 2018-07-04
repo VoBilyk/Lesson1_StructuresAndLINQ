@@ -65,21 +65,16 @@ namespace Lesson1_StructuresAndLINQ
                 comments = JsonConvert.DeserializeObject<List<Comment>>(commentsJSON);
             }
 
-            //foreach (var post in posts)
-            //{
-            //    post.Comments = comments.Where(x => x.PostId == post.Id).ToList();
-            //}
+            foreach (var post in posts)
+            {
+                post.Comments = comments.Where(x => x.PostId == post.Id).ToList();
+            }
 
-            //foreach (var user in users)
-            //{
-            //    user.Todos = todos.Where(x => x.UserId == user.Id).ToList();
-            //    user.Posts = posts.Where(x => x.UserId == user.Id).ToList();
-            //}
-
-            users = from u in users
-                    join t in todos on u.Id equals t.UserId
-                    join p in posts on u.Id equals p.UserId
-                    join c in comments on 
+            foreach (var user in users)
+            {
+                user.Todos = todos.Where(x => x.UserId == user.Id).ToList();
+                user.Posts = posts.Where(x => x.UserId == user.Id).ToList();
+            }
 
             return users;
         }
