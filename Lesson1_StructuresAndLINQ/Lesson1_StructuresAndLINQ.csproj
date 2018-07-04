@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Comment.cs" />
+    <Compile Include="DBService.cs" />
     <Compile Include="Model\Post.cs" />
     <Compile Include="Model\Todo.cs" />
     <Compile Include="Program.cs" />

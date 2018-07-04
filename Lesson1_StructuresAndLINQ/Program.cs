@@ -10,8 +10,9 @@ namespace Lesson1_StructuresAndLINQ
     {
         static void Main(string[] args)
         {
-            var url = WebRequest.CreateURL("users");
-            WebRequest.GetUsers(url);
+            DBService.GetCountCommentsByUserPosts(14);
+
+            Console.ReadKey();
         }
     }
 }
