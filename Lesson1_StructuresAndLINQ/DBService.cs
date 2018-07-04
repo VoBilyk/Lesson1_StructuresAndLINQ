@@ -99,7 +99,16 @@ namespace Lesson1_StructuresAndLINQ
 
         public static void GetPostStructure(int postId)
         {
-            var post = users.Select(u => u.Posts.First(p => p.Id == postId)).First();
+            //var post = users.Select(u => u.Posts.Find(p => p.Id == postId);
+            //var post1 = users.Select(u => u.Posts.Where(p => p.Id == postId).First());// .Where(p => p.Where(p..Find(p => p.Id == postId)).First();
+
+
+            var post = (from u in users
+                            from p in u.Posts
+                            where p.Id == postId
+                            select p).First();
+            
+
             var theLongestComment = post.Comments.OrderByDescending(c => c.Body).First();
             var theMostLikedComment = post.Comments.OrderByDescending(c => c.Likes).First();
             var commentsNumber = post.Comments.Where(c => c.Likes == 0 || c.Body.Length < 80).Count();
