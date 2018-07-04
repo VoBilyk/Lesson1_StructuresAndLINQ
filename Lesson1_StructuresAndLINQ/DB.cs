@@ -2,11 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using Lesson1_StructuresAndLINQ.Model;
 
 
@@ -26,7 +22,7 @@ namespace Lesson1_StructuresAndLINQ
         }
 
 
-        public static List<User> CreateDB()
+        public static List<User> DownloadDB()
         {
             var url = @"https://5b128555d50a5c0014ef1204.mockapi.io/";
 
@@ -66,6 +62,7 @@ namespace Lesson1_StructuresAndLINQ
             }
 
 
+
             foreach (var user in users)
             {
                 user.Todos = todos.Where(x => x.UserId == user.Id).ToList();
@@ -76,26 +73,6 @@ namespace Lesson1_StructuresAndLINQ
                     post.Comments = comments.Where(x => x.PostId == post.Id).ToList();
                 }
             }
-
-
-            //var query = from user in users
-            //            join todo in todos on user.Id equals todo.UserId
-            //            into userTodos
-
-            //            join post in posts on user.Id equals post.UserId
-            //            into userPosts
-
-            //            from item in userPosts
-            //            join comment in comments on item.Id equals comment.PostId
-            //            into postComments
-
-            //            select new User()
-            //            {
-            //                Id = user.Id,
-            //                Name = user.Name,
-            //                Todos = userTodos.ToList(),
-            //                Posts = userPosts.ToList()
-            //            };
 
             return users;
         }

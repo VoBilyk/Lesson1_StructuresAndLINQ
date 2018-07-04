@@ -11,7 +11,7 @@ namespace Lesson1_StructuresAndLINQ
 
         static DBService()
         {
-            users = DB.CreateDB();
+            users = DB.DownloadDB();
         }
 
         public static void GetCommentNumberByUserPosts(int userId)
