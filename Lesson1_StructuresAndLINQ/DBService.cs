@@ -16,9 +16,8 @@ namespace Lesson1_StructuresAndLINQ
 
         public static void GetCommentNumberByUserPosts(int userId)
         {
-            var query = users.FirstOrDefault(u => u.Id == userId).Posts.Select(p => new { Post = p, CommentNumber = p.Comments.Count });
-
-
+            var query = users.FirstOrDefault(u => u.Id == userId)?.Posts.Select(p => new { Post = p, CommentNumber = p.Comments.Count });
+            
             // Visualization
             Console.WriteLine("Posts:");
             foreach (var item in query)
@@ -29,7 +28,7 @@ namespace Lesson1_StructuresAndLINQ
 
         public static void GetCommentsByUserPosts(int userId)
         {
-            var postComments = from post in users.First(u => u.Id == userId).Posts
+            var postComments = from post in users.FirstOrDefault(u => u.Id == userId)?.Posts
                                from comment in post.Comments
                                where comment.Body.Length < 50
                                select comment;
@@ -44,7 +43,7 @@ namespace Lesson1_StructuresAndLINQ
 
         public static void GetFineshedTodosByUser(int userId)
         {
-            var finishedTodos = users.First(u => u.Id == userId).Todos.Where(t => t.IsComplete).Select( t => new { t.Id, t.Name });
+            var finishedTodos = users.FirstOrDefault(u => u.Id == userId)?.Todos.Where(t => t.IsComplete).Select( t => new { t.Id, t.Name });
 
 
             // Visualization
