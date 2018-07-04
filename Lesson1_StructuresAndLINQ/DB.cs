@@ -30,6 +30,7 @@ namespace Lesson1_StructuresAndLINQ
             List<Post> posts = null;
             List<Todo> todos = null;
             List<Comment> comments = null;
+            List<Address> addresses = null;
 
             var client = new HttpClient();
 
@@ -61,18 +62,57 @@ namespace Lesson1_StructuresAndLINQ
                 comments = JsonConvert.DeserializeObject<List<Comment>>(commentsJSON);
             }
 
+            var addressesResponse = client.GetAsync(url + "address").Result;
+            if (commentsResponse.IsSuccessStatusCode)
+            {
+                string adrressesJSON = addressesResponse.Content.ReadAsStringAsync().Result;
+                addresses = JsonConvert.DeserializeObject<List<Address>>(adrressesJSON);
+            }
 
 
             foreach (var user in users)
             {
-                user.Todos = todos.Where(x => x.UserId == user.Id).ToList();
-                user.Posts = posts.Where(x => x.UserId == user.Id).ToList();
+                user.Todos = todos.Where(t => t.UserId == user.Id).ToList();
+                user.Posts = posts.Where(u => u.UserId == user.Id).ToList();
+                user.Addresses = addresses.Where(a => a.UserId == user.Id).ToList();
 
                 foreach (var post in user.Posts)
                 {
                     post.Comments = comments.Where(x => x.PostId == post.Id).ToList();
                 }
             }
+
+            //var postsQuery = from post in posts
+            //                 join comment in comments on post.Id equals comment.PostId
+            //                 into postComments
+            //                 select new Post()
+            //                 {
+            //                     Body = post.Body,
+            //                     CreatedAt = post.CreatedAt,
+            //                     Id = post.Id,
+            //                     Likes = post.Likes,
+            //                     Title = post.Title,
+            //                     UserId = post.UserId,
+            //                     Comments = postComments.ToList()
+            //                 };
+
+            //var usersQuery = from user in users
+            //                 join todo in todos on user.Id equals todo.UserId
+            //                 into userTodos
+            //                 join post in postsQuery on user.Id equals post.UserId
+            //                 into userPosts
+            //                 join adress in addresses on user.Id equals adress.UserId
+            //                 into userAddresses
+
+            //                 select new User()
+            //                 {
+            //                     CreatedAt = user.CreatedAt,
+            //                     Id = user.Id,
+            //                     Name = user.Name,
+            //                     Todos = userTodos.ToList(),
+            //                     Posts = userPosts.ToList(),
+            //                     Addresses = userAddresses.ToList()                                 
+            //                 };
 
             return users;
         }
