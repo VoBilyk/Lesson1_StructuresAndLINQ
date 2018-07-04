@@ -14,5 +14,10 @@ namespace Lesson1_StructuresAndLINQ.Model
         public int UserId { get; set; }
         public int Likes { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        public override string ToString()
+        {
+            return $"Body: {Body}";
+        }
     }
 }
