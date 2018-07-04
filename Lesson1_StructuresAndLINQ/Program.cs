@@ -11,10 +11,10 @@ namespace Lesson1_StructuresAndLINQ
         static void Main(string[] args)
         {
             var userId = 14;
-            DBService.GetCountCommentsByUserPosts(userId);
+            DBService.GetCommentNumberByUserPosts(userId);
             DBService.GetCommentsByUserPosts(userId);
             DBService.GetFineshedTodosByUser(userId);
-            DBService.SortUsersAndTodos();
+            DBService.GetSortUsersAndTodos();
             DBService.GetUserStructure(userId);
             DBService.GetPostStructure(17);
 

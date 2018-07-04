@@ -17,7 +17,7 @@ namespace Lesson1_StructuresAndLINQ
             users = DB.CreateDB();
         }
 
-        public static void GetCountCommentsByUserPosts(int userId)
+        public static void GetCommentNumberByUserPosts(int userId)
         {
             var query = users.First(u => u.Id == userId).Posts.Select(p => new { Post = p, CommentNumber = p.Comments.Count });
 
@@ -25,7 +25,7 @@ namespace Lesson1_StructuresAndLINQ
             // Visualization
             foreach (var item in query)
             {
-                Console.WriteLine($"Post: {item.Post}\n, Count comments: {item.CommentNumber}");
+                Console.WriteLine($"Post:\n{item.Post}\nCount comments: {item.CommentNumber}");
             }
         }
 
@@ -55,7 +55,7 @@ namespace Lesson1_StructuresAndLINQ
             }
         }
 
-        public static void SortUsersAndTodos()
+        public static void GetSortUsersAndTodos()
         {
             var sortedUsers = users.OrderBy(u => u.Name).ThenByDescending(u => u.Todos.Select(t => t.Name.Length));
 
