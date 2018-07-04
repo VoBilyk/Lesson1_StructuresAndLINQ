@@ -17,7 +17,7 @@ namespace Lesson1_StructuresAndLINQ.Model
 
         public override string ToString()
         {
-            return $"Body: {Body}";
+            return $"{Body}";
         }
     }
 }

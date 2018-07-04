@@ -16,7 +16,7 @@ namespace Lesson1_StructuresAndLINQ.Model
 
         public override string ToString()
         {
-            return $"Name: {Name}, {(IsComplete ? "Completed" : "Uncompleted")}";
+            return $"{Name}, {(IsComplete ? "Completed" : "Uncompleted")}";
         }
     }
 }

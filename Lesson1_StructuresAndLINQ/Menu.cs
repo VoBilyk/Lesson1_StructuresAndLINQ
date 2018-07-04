@@ -32,7 +32,7 @@ namespace Lesson1_StructuresAndLINQ
         }
 
 
-        static public void ChooseCommand()
+        static private void ChooseCommand()
         {
             int choice = ReadNumber("Enter your choice: ");
             int id;
@@ -80,9 +80,9 @@ namespace Lesson1_StructuresAndLINQ
             }
 
             Console.WriteLine(new string('-', 35));
-            Console.WriteLine("\n\n");
 
             Console.ReadKey();
+            Console.Clear();
         }
 
         private static int ReadNumber(string text)

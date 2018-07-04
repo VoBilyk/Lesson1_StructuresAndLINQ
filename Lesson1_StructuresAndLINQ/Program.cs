@@ -10,15 +10,17 @@ namespace Lesson1_StructuresAndLINQ
     {
         static void Main(string[] args)
         {
-            var userId = 14;
-            DBService.GetCommentNumberByUserPosts(userId);
-            DBService.GetCommentsByUserPosts(userId);
-            DBService.GetFineshedTodosByUser(userId);
-            DBService.GetSortUsersAndTodos();
-            DBService.GetUserStructure(userId);
-            DBService.GetPostStructure(17);
+            //var userId = 14;
+            //DBService.GetCommentNumberByUserPosts(userId);
+            //DBService.GetCommentsByUserPosts(userId);
+            //DBService.GetFineshedTodosByUser(userId);
+            //DBService.GetSortUsersAndTodos();
+            //DBService.GetUserStructure(userId);
+            //DBService.GetPostStructure(17);
 
-            Console.ReadKey();
+            //Console.ReadKey();
+
+            Menu.Run();
         }
     }
 }
