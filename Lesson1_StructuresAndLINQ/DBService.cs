@@ -1,10 +1,7 @@
-﻿using Lesson1_StructuresAndLINQ.Model;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Lesson1_StructuresAndLINQ.Model;
 
 namespace Lesson1_StructuresAndLINQ
 {
@@ -76,17 +73,13 @@ namespace Lesson1_StructuresAndLINQ
             }
         }
 
-
         public static void GetUserStructure(int userId)
         {
             var user = users.FirstOrDefault(u => u.Id == userId);
             var lastPost = user?.Posts.OrderByDescending(p => p.CreatedAt).FirstOrDefault();
             var commentNumberByLastPost = lastPost?.Comments.Count;
             var unfinishedTodoNumber = user?.Todos.Where(t => !t.IsComplete).Count();
-
-            // todo
             var theMostPopularPostByComments = user?.Posts.OrderByDescending(p => p.Comments.Where(c => c.Body.Length > 80).Count()).FirstOrDefault();
-
             var theMostPopularPostByLikes = user?.Posts.OrderByDescending(p => p.Likes).FirstOrDefault();
 
             var userStructure = new { user, lastPost, commentNumberByLastPost, unfinishedTodoNumber, theMostPopularPostByComments, theMostPopularPostByLikes };
@@ -108,7 +101,6 @@ namespace Lesson1_StructuresAndLINQ
                             where p.Id == postId
                             select p).FirstOrDefault();
             
-
             var theLongestComment = post?.Comments.OrderByDescending(c => c.Body).FirstOrDefault();
             var theMostLikedComment = post?.Comments.OrderByDescending(c => c.Likes).FirstOrDefault();
             var commentsNumber = post?.Comments.Where(c => c.Likes == 0 || c.Body.Length < 80).Count();

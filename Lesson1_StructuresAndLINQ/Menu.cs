@@ -36,9 +36,7 @@ namespace Lesson1_StructuresAndLINQ
         {
             int choice = ReadNumber("Enter your choice: ");
             int id;
-
-            Console.WriteLine(new string('-', 35));
-
+            
             switch (choice)
             {
                 case 1:
@@ -93,6 +91,7 @@ namespace Lesson1_StructuresAndLINQ
             int number = 0;
 
             Int32.TryParse(str, out number);
+            Console.WriteLine(new string('-', 35));
 
             return number;
         }
